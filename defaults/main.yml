@@ -1,0 +1,4 @@
+---
+
+sysctl_settings:
+  'net.ipv4.conf.default.rp_filter': '1'

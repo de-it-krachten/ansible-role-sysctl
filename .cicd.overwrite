@@ -1,0 +1,28 @@
+---
+
+# Generic
+generic:
+  role: ansible-role-sysctl
+  role_short: sysctl
+  role_description: |
+    Installs/configures/manages sysctl
+  collections: []
+
+# Supported platforms
+platforms:
+  fedora37:
+    ci: false
+    supported: false
+  fedora38:
+    ci: false
+    supported: false
+  fedora39:
+    ci: false
+    supported: false
+  fedora40:
+    ci: false
+    supported: false
+
+molecule:
+  requirements:
+    roles_extra: []

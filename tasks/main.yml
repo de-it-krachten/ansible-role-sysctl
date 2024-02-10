@@ -1,0 +1,50 @@
+---
+
+- name: Create custom locations
+  ansible.builtin.file:
+    path: /etc/sysctl.d
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Get all sysctl locations
+  ansible.builtin.find:
+    paths:
+      - /etc
+      - /run
+      - /usr/local/lib
+      - /usr/lib
+    pattern: sysctl.d
+    file_type: directory
+  register: __sysctl_d
+
+- name: Get all sysctl files
+  ansible.builtin.find:
+    paths: "{{ __sysctl_d.files | json_query('[].path') }}"
+    patterns: '*.conf'
+    file_type: any
+  register: find_sysctl_d
+
+- name: Disable settings in other drop-in files
+  ansible.builtin.include_tasks:
+    file: disable.yml
+  vars:
+    key: "{{ item.key }}"
+  loop: "{{ sysctl_settings | dict2items }}"
+
+# - name: Set runtime settings
+#   ansible.posix.sysctl:
+#     name: "{{ item.key }}"
+#     value: "{{ item.value }}"
+#     state: present
+#   loop: "{{ sysctl_settings | dict2items }}"
+
+- name: Set persistant settings
+  ansible.posix.sysctl:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+    sysctl_file: /etc/sysctl.d/99-overwrite.conf
+    reload: true
+  loop: "{{ sysctl_settings | dict2items }}"
