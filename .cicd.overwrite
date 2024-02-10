@@ -1,0 +1,13 @@
+---
+
+# Generic
+generic:
+  role: ansible-role-sysctl
+  role_short: sysctl
+  role_description: |
+    Installs/configures/manages sysctl
+  collections: []
+
+molecule:
+  requirements:
+    roles_extra: []

@@ -1,0 +1,11 @@
+---
+
+- name: Disable settings in other drop-in files
+  replace:
+    path: "{{ item2.path }}"
+    regexp: ^[\s]*{{ key }}
+    replace: '# {{ key }}'
+  loop: "{{ find_sysctl_d.files }}"
+  loop_control:
+    loop_var: item2
+    label: "{{ key }} -> {{ item2.path }}"

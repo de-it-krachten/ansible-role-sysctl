@@ -1,0 +1,35 @@
+---
+
+- name: Get all sysctl files
+  find:
+    paths:
+    - /etc/sysctl.d/
+    - /run/sysctl.d/
+    - /usr/local/lib/sysctl.d/
+    - /usr/lib/sysctl.d/
+    patterns: '*.conf'
+    file_type: any
+  register: find_sysctl_d
+
+- name: Disable settings in other drop-in files
+  include_tasks:
+    file: disable.yml
+  vars:
+    key: "{{ item.key }}"
+  loop: "{{ sysctl_settings | dict2items }}"
+
+#- name: Set runtime settings
+#  ansible.posix.sysctl:
+#    name: "{{ item.key }}"
+#    value: "{{ item.value }}"
+#    state: present
+#  loop: "{{ sysctl_settings | dict2items }}"
+
+- name: Set persistant settings
+  ansible.posix.sysctl:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+    sysctl_file: /etc/sysctl.d/99-overwrite.conf
+    reload: true
+  loop: "{{ sysctl_settings | dict2items }}"
