@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/de-it-krachten/ansible-role-sysctl/compare/v1.1.0...v1.2.0) (2024-12-29)
+
+
+### Features
+
+* Update supported platforms & CI ([3bf964d](https://github.com/de-it-krachten/ansible-role-sysctl/commit/3bf964d12493207f728e6c90856df3c837cdc410))
+
 # [1.1.0](https://github.com/de-it-krachten/ansible-role-sysctl/compare/v1.0.0...v1.1.0) (2024-06-03)
 
 
