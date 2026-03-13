@@ -1,5 +1,10 @@
 ---
 
+- name: Assertion
+  ansible.builtin.assert:
+    that:
+      - sysctl_settings != {}
+
 - name: Create custom locations
   ansible.builtin.file:
     path: /etc/sysctl.d
@@ -8,37 +13,18 @@
     group: root
     mode: "0755"
 
-- name: Get all sysctl locations
-  ansible.builtin.find:
-    paths:
-      - /etc
-      - /run
-      - /usr/local/lib
-      - /usr/lib
-    pattern: sysctl.d
-    file_type: directory
-  register: __sysctl_d
+- name: Check for status of /etc/sysctl.conf
+  ansible.builtin.stat:
+    path: /etc/sysctl.conf
+  register: __sysctl_conf
 
-- name: Get all sysctl files
-  ansible.builtin.find:
-    paths: "{{ __sysctl_d.files | json_query('[].path') }}"
-    patterns: '*.conf'
-    file_type: any
-  register: find_sysctl_d
-
-- name: Disable settings in other drop-in files
-  ansible.builtin.include_tasks:
-    file: disable.yml
-  vars:
-    key: "{{ item.key }}"
+- name: Disable same settings in /etc/sysctl.conf
+  ansible.builtin.replace:
+    path: /etc/sysctl.conf
+    regexp: "^\\s*({{ item.key }})\\s*=\\s*(.*)"
+    replace: "# \\1 = \\2"
   loop: "{{ sysctl_settings | dict2items }}"
-
-# - name: Set runtime settings
-#   ansible.posix.sysctl:
-#     name: "{{ item.key }}"
-#     value: "{{ item.value }}"
-#     state: present
-#   loop: "{{ sysctl_settings | dict2items }}"
+  when: __sysctl_conf.stat.exists
 
 - name: Set persistant settings
   ansible.posix.sysctl:
