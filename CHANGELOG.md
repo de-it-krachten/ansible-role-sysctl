@@ -1,3 +1,16 @@
+# [1.4.0](https://github.com/de-it-krachten/ansible-role-sysctl/compare/v1.3.0...v1.4.0) (2026-03-13)
+
+
+### Bug Fixes
+
+* Leave system-wide configuration files ([388f61d](https://github.com/de-it-krachten/ansible-role-sysctl/commit/388f61dbbef629f8b685712157a4f33d188b5143))
+
+
+### Features
+
+* Added support for openSUSE Leap 16 ([dbe1031](https://github.com/de-it-krachten/ansible-role-sysctl/commit/dbe1031f32074c0749c6de1be01b15b5559bb8a6))
+* Added support for SUSE Linux Enterprise 16 ([1ac9cf3](https://github.com/de-it-krachten/ansible-role-sysctl/commit/1ac9cf36c1bda795a724d14ca23b0b31704eb26e))
+
 # [1.3.0](https://github.com/de-it-krachten/ansible-role-sysctl/compare/v1.2.0...v1.3.0) (2025-08-07)
 
 
