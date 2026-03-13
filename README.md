@@ -49,8 +49,8 @@ Note:
 ## Role Variables
 ### defaults/main.yml
 <pre><code>
-sysctl_settings:
-  'net.ipv4.conf.default.rp_filter': '1'
+# dict of sysctl settings
+sysctl_settings: {}
 </pre></code>
 
 
@@ -62,6 +62,12 @@ sysctl_settings:
 - name: sample playbook for role 'sysctl'
   hosts: all
   become: 'yes'
+  vars:
+    molecule_driver: '{{ lookup(''env'', ''MOLECULE_DRIVER_NAME'') }}'
+    sysctl_settings:
+      net.ipv4.conf.default.rp_filter: '1'
+      net.ipv4.ip_forward: '1'
+      net.ipv4.ip_nonlocal_bind: '1'
   tasks:
     - name: Include role 'sysctl'
       ansible.builtin.include_role:

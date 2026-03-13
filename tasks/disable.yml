@@ -9,5 +9,7 @@
   loop_control:
     loop_var: item2
     label: "{{ key }} -> {{ item2.path }}"
-  when: item2.path is not search('99-overwrite.conf')
+  when:
+    - item2.isreg
+    - item2.path is not search('99-overwrite.conf')
 
