@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/de-it-krachten/ansible-role-sysctl/compare/v1.5.0...v1.6.0) (2026-07-26)
+
+
+### Features
+
+* Added support for Ubuntu 26.04 LTS ([5299567](https://github.com/de-it-krachten/ansible-role-sysctl/commit/529956713a876e82fd80bc3ddf53fd5d2e3fbdfd))
+
 # [1.5.0](https://github.com/de-it-krachten/ansible-role-sysctl/compare/v1.4.0...v1.5.0) (2026-03-15)
 
 
