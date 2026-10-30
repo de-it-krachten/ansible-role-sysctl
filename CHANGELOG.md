@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/de-it-krachten/ansible-role-sysctl/compare/v1.6.0...v1.7.0) (2026-10-30)
+
+
+### Features
+
+* Drop support for Debian 11 (Bullseye) ([40aa10f](https://github.com/de-it-krachten/ansible-role-sysctl/commit/40aa10f993735de57f08d2a9bdd68f3d0729c007))
+
 # [1.6.0](https://github.com/de-it-krachten/ansible-role-sysctl/compare/v1.5.0...v1.6.0) (2026-07-26)
 
 
